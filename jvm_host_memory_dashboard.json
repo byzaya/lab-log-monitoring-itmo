@@ -1,0 +1,129 @@
+{
+  "dashboard": {
+    "id": null,
+    "title": "Full JVM & Host Metrics",
+    "tags": ["spring", "jvm", "memory", "cpu", "threads", "host"],
+    "timezone": "browser",
+    "schemaVersion": 36,
+    "version": 1,
+    "panels": [
+      {
+        "type": "graph",
+        "title": "JVM Heap Memory",
+        "datasource": "Prometheus",
+        "targets": [
+          {
+            "expr": "sum(jvm_memory_used_bytes{area=\"heap\"}) by (application)",
+            "legendFormat": "{{application}}",
+            "refId": "A"
+          }
+        ],
+        "gridPos": {"x":0,"y":0,"w":12,"h":8}
+      },
+      {
+        "type": "graph",
+        "title": "JVM Non-Heap Memory",
+        "datasource": "Prometheus",
+        "targets": [
+          {
+            "expr": "sum(jvm_memory_used_bytes{area=\"nonheap\"}) by (application)",
+            "legendFormat": "{{application}}",
+            "refId": "B"
+          }
+        ],
+        "gridPos": {"x":0,"y":8,"w":12,"h":8}
+      },
+      {
+        "type": "graph",
+        "title": "GC Memory Allocated",
+        "datasource": "Prometheus",
+        "targets": [
+          {
+            "expr": "jvm_gc_memory_allocated_bytes_total",
+            "legendFormat": "{{application}}",
+            "refId": "C"
+          }
+        ],
+        "gridPos": {"x":12,"y":0,"w":12,"h":8}
+      },
+      {
+        "type": "graph",
+        "title": "GC Memory Promoted",
+        "datasource": "Prometheus",
+        "targets": [
+          {
+            "expr": "jvm_gc_memory_promoted_bytes_total",
+            "legendFormat": "{{application}}",
+            "refId": "D"
+          }
+        ],
+        "gridPos": {"x":12,"y":8,"w":12,"h":8}
+      },
+      {
+        "type": "graph",
+        "title": "JVM Live Threads",
+        "datasource": "Prometheus",
+        "targets": [
+          {
+            "expr": "jvm_threads_live_threads",
+            "legendFormat": "{{application}}",
+            "refId": "E"
+          }
+        ],
+        "gridPos": {"x":0,"y":16,"w":12,"h":8}
+      },
+      {
+        "type": "graph",
+        "title": "JVM Daemon Threads",
+        "datasource": "Prometheus",
+        "targets": [
+          {
+            "expr": "jvm_threads_daemon_threads",
+            "legendFormat": "{{application}}",
+            "refId": "F"
+          }
+        ],
+        "gridPos": {"x":12,"y":16,"w":12,"h":8}
+      },
+      {
+        "type": "graph",
+        "title": "JVM CPU Usage",
+        "datasource": "Prometheus",
+        "targets": [
+          {
+            "expr": "process_cpu_usage",
+            "legendFormat": "{{application}}",
+            "refId": "G"
+          }
+        ],
+        "gridPos": {"x":0,"y":24,"w":12,"h":8}
+      },
+      {
+        "type": "graph",
+        "title": "Host CPU Usage",
+        "datasource": "Prometheus",
+        "targets": [
+          {
+            "expr": "system_cpu_usage",
+            "legendFormat": "{{application}}",
+            "refId": "H"
+          }
+        ],
+        "gridPos": {"x":12,"y":24,"w":12,"h":8}
+      },
+      {
+        "type": "graph",
+        "title": "Host Memory Used",
+        "datasource": "Prometheus",
+        "targets": [
+          {
+            "expr": "node_memory_MemTotal_bytes - node_memory_MemAvailable_bytes",
+            "legendFormat": "{{instance}}",
+            "refId": "I"
+          }
+        ],
+        "gridPos": {"x":0,"y":32,"w":24,"h":8}
+      }
+    ]
+  }
+}
